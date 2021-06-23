@@ -14,7 +14,7 @@ export default function App() {
                 <Stack.Screen
                     name="Main"
                     component={Main}
-                    options={{title: 'Welcome to Appeggio!'}}
+                    options={{title: 'Welcome to Guitarganizer!'}}
                 />
                 <Stack.Screen
                     name="Details"

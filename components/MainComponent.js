@@ -16,7 +16,7 @@ class Main extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>Collection</Text>
+                    <Text style={styles.headerText}>Collection 1</Text>
                 </View>
                 <View style={styles.scrollContainer}>
                     <Collection guitars={this.state.guitars} />
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderBottomWidth: 5,
-        borderBottomColor: '#ddd'
+        borderBottomColor: '#ddd',
+        height: 50
     },
     headerText: {
         color: 'white',

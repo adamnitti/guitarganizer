@@ -1,23 +1,28 @@
 import React from 'react';
-import { FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { FlatList, View, Image } from 'react-native';
+import { ListItem, Avatar } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 function Collection(props) {
 
     const navigation = useNavigation();
 
+    console.log(props.guitars.image);
+    
     const renderCollectionItem = ({item}) => {
+
         return (
-            
-            <ListItem
-                title={item.brand}
-                subtitle={item.model}
-                leftAvatar={{ source: require('../assets/favicon.png')}}
-                onPress={() => { navigation.navigate('Details') }}
-            />
-                
-            
+            <View>
+                <ListItem
+                    title = {item.brand}
+                    subtitle = {item.model}
+                    
+                    onPress={() => 
+                        navigation.navigate('Details', {item})
+                    }
+                    
+                />                
+            </View>
         );
     };
 
