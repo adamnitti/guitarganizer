@@ -17,9 +17,7 @@ const Main = () => {
             <View style={styles.scrollContainer}>
                 <Collection /> 
             </View>
-            <View style={styles.footer} >
-                <GuitarModal />
-            </View>
+            
         </View>
     );
     

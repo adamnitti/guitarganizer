@@ -59,5 +59,56 @@ export default StyleSheet.create({
     addButtonText: {
         color: '#fff',
         fontSize: 32
+    },
+    modalFooter: {
+        bottom: 5,
+        left: 0,
+        right: 0,
+        zIndex: 10,
+    },
+    modalCenteredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    modalButton: {
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2
+    },
+    modalButtonOpen: {
+        backgroundColor: "#e91e63",
+    },
+    modalButtonClose: {
+        backgroundColor: "#2196F3",
+    },
+    modalTextStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        fontWeight: "bold",
+        marginBottom: 15,
+        textAlign: "left",
+        justifyContent: "center"
+    },
+    modalInputText: {
+        fontStyle: "italic"
     }
 });

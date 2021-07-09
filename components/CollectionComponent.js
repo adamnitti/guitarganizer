@@ -1,15 +1,41 @@
 import React, { useState } from 'react';
-import { GUITARS } from '../shared/guitars';
+//import { GUITARS } from '../shared/guitars';
 import styles from './Styles';
-import { FlatList, View, Text, ScrollView } from 'react-native';
+import { Button, FlatList, View, Text, ScrollView, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import GuitarModal from './GuitarModal';
 //import { StyleSheet } from 'react-native';
 
 const Collection = () => {
 
     const navigation = useNavigation();
 
-    const [gtrlist, setGtrlist] = useState( GUITARS );
+    const [showAddGuitar, setShowAddGuitar] = useState(false);
+
+    const [gtrlist, setGtrlist] = useState([
+        {
+            id: 1,
+            brand: "Ibanez",
+            model: "ANB205",
+            year: 2019,
+            sn: "001",
+            favorite: false,
+            description: "Ash body, Red Trans, Maple board",
+            image: '../public/assets/fenderjazz2.png',
+            history: []
+        },
+        {
+            id: 2,
+            brand: "Yamaha",
+            model: "TRB/P-II",
+            year: 2000,
+            sn: "1233",
+            favorite: false,
+            description: "Natural",
+            image: '../public/assets/fenderjazz1.png',
+            history: []
+        }
+    ]);
 
     // Add Guitar
     const addGuitar = () => {
@@ -26,10 +52,17 @@ const Collection = () => {
     } */
 
     
+
+
+    
         return (
-            <View>
+            <View
+            onAdd={() => setShowAddGuitar(!showAddGuitar)}
+            showAdd={showAddGuitar}
+            >
+                {showAddGuitar && <GuitarModal onAdd={addGuitar}/>}
+                {(gtrlist.length > 0) ? (
                 <FlatList
-                    onAdd={addGuitar}
                     data={gtrlist}
                     keyExtractor={item => item.id.toString()}
                 
@@ -42,12 +75,22 @@ const Collection = () => {
                             >
                             {item.year} {item.brand} {item.model}
                         </Text>
-                    } 
-                    
+                    }     
                 />
+                ) : <p>Collection empty</p>
+                }
+                <View>
+                    <Button
+                        title='Add New Guitar'
+                        style={[styles.footer, styles.button, styles.buttonOpen]}
+                        onPress={() => 
+                            {showAddGuitar && <GuitarModal onAdd={addGuitar} />
+                        }}
+                    >
+                    </Button>
+                </View>
             </View>
         )
 
-}
-
+};
 export default Collection;
