@@ -9,7 +9,7 @@ const Collection = () => {
 
     const navigation = useNavigation();
 
-    const [gtrlist, setGtrlist] = useState({ GUITARS });
+    const [gtrlist, setGtrlist] = useState( GUITARS );
 
     // Add Guitar
     const addGuitar = () => {

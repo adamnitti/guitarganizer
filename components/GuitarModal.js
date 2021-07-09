@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Modal, StyleSheet, Text, TextInput, Pressable } from 'react-native';
 
-const GuitarModal = ({ addGuitar }) => {
+
+const GuitarModal = ({ onAdd }) => {
     const [brand, setBrand] = useState('');
     const [model, setModel] = useState('');
     const [year, setYear] = useState('');
@@ -22,7 +23,7 @@ const GuitarModal = ({ addGuitar }) => {
             return;
         }
 
-        addGuitar(e);
+        onAdd({ brand, model, year, sn, description });
         
         setBrand('');
         setModel('');
