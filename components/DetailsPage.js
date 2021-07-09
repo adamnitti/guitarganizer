@@ -1,17 +1,25 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native'
+import { View, Text } from 'react-native'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import { TabRouter, useNavigation } from '@react-navigation/native';
 
 
 
-function DetailsPage({navigation, route}) {
+const DetailsPage = ({ route, navigation }) => {
+
+  const { item } = route.params;
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>{route.params.item.year} {route.params.item.brand} {route.params.item.model}</Text>
-          <Text>{route.params.item.description}</Text>
-          <Text>{route.params.item.history}</Text>
+          <Text>{item.year} {item.brand} {item.model}</Text>
+          <Text>{item.description}</Text>
+          {item.history.map(item => 
+            <Text 
+              key={item.id}
+              item={item}
+            >{item.date} {item.item} {item.cost}</Text>
+          )}
+          
           <Button title="Go back" onPress={() => navigation.goBack()} />
         </View>
     );

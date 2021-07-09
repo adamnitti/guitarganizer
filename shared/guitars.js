@@ -7,8 +7,27 @@ export const GUITARS = [
         sn: "1233",
         favorite: false,
         description: "Black with rosewood fingerboard. Tortoise shell pickguard",
-        image: src= '../public/fenderjazz1.png',
-        history: []
+        image: src= './public/fenderjazz1.png',
+        history: [
+            {
+                id: 10,
+                date: "5/15/20",
+                item: "fret job",
+                cost: 450
+            },
+            {
+                id: 11,
+                date: "5/15/20",
+                item: "polish",
+                cost: 0
+            },
+            {
+                id: 12,
+                date: "5/15/20",
+                item: "tuning key replacement",
+                cost: 60
+            }
+        ]
     },
     {
         id: 1,
@@ -84,6 +103,17 @@ export const GUITARS = [
         sn: "634562254",
         favorite: false,
         description: "Black with rosewood fingerboard",
+        image: '../public/assets/fenderjazz1.png',
+        history: []
+    },
+    {
+        id: 8,
+        brand: "Tobias",
+        model: "5 String",
+        year: 1988,
+        sn: "567",
+        favorite: false,
+        description: "Black with maple fingerboard",
         image: '../public/assets/fenderjazz1.png',
         history: []
     }

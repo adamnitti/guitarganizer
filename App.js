@@ -14,12 +14,12 @@ export default function App() {
                 <Stack.Screen
                     name="Main"
                     component={Main}
-                    options={{title: 'Welcome to Guitarganizer!'}}
+                    //options={{title: 'Welcome to Guitarganizer!'}}
                 />
                 <Stack.Screen
                     name="Details"
                     component={DetailsPage}
-                    options={{title: 'Guitar Details'}}
+                    //options={{title: 'Guitar Details'}}
                     
                 />
             </Stack.Navigator>

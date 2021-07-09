@@ -1,15 +1,38 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Modal, StyleSheet, Text, TextInput, Pressable } from 'react-native';
-import { GUITARS } from '../shared/guitars';
 
-const GuitarModal = () => {
-    const [brand, onChangeBrand] = useState(null);
-    const [model, onChangeModel] = useState(null);
-    const [year, onChangeYear] = useState(null);
-    const [sn, onChangeSn] = useState(null);
-    const [description, onChangeDescription] = React.useState(null)
+const GuitarModal = ({ addGuitar }) => {
+    const [brand, setBrand] = useState('');
+    const [model, setModel] = useState('');
+    const [year, setYear] = useState('');
+    const [sn, setSn] = useState('');
+    const [description, setDescription] = useState('');
+    //const [history, setHistory] = useState([]);
+    //const [favorite, setFavorite] = useState(false);
+
+
 
     const [modalVisible, setModalVisible] = useState(false);
+
+    const onSubmit = (e) => {
+        
+        e.preventDefault()
+        if ((!brand) || (!model)) {
+            alert('Please add a guitar and model')
+            return;
+        }
+
+        addGuitar(e);
+        
+        setBrand('');
+        setModel('');
+        setYear('');
+        setSn('');
+        setDescription('');
+        //setHistory([]);
+        //setFavorite(false);
+        setModalVisible(!modalVisible);
+    }
 
     return (
         <View>
@@ -17,50 +40,47 @@ const GuitarModal = () => {
             animationType="slide"
             transparent={true}
             visible={modalVisible}
-            onRequestClose={() => {
-                setModalVisible(!modalVisible);
-            }}
         >
             
             <View style={styles.modalView}>
                 <Text style={styles.modalText}>Brand</Text>
                 <TextInput style={styles.modalInputText}
-                    onChangeText={onChangeBrand}
+                    onChangeText={setBrand}
                     value={brand}
                     placeholder="Enter Brand"
                     underlineColorAndroid="transparent"
                 />
                 <Text style={styles.modalText}>Model</Text>
                 <TextInput style={styles.modalInputText}
-                    onChangeText={onChangeModel}
+                    onChangeText={setModel}
                     value={model}
                     placeholder="Enter Model"
                     underlineColorAndroid="transparent"
                 />
                 <Text style={styles.modalText}>Year Mfg</Text>
                 <TextInput style={styles.modalInputText}
-                    onChangeText={onChangeYear}
+                    onChangeText={setYear}
                     value={year}
                     placeholder="Enter Year Manufactured"
                     underlineColorAndroid="transparent"
                 />
                 <Text style={styles.modalText}>Serial Number</Text>
                 <TextInput style={styles.modalInputText}
-                    onChangeText={onChangeSn}
+                    onChangeText={setSn}
                     value={sn}
                     placeholder="Enter Serial #"
                     underlineColorAndroid="transparent"
                 />
                 <Text style={styles.modalText}>Description</Text>
                 <TextInput style={styles.modalInputText}
-                    onChangeText={onChangeDescription}
+                    onChangeText={setDescription}
                     value={description}
                     placeholder="Enter Description"
                     underlineColorAndroid="transparent"
                 />
                 <Pressable
                     style={[styles.button, styles.buttonOpen]}
-                    onPress={() => setModalVisible(!modalVisible)}
+                    onPress={onSubmit}
                 >
                     <Text style={styles.textStyle}>Add To Collection</Text>
                 </Pressable> 
@@ -74,7 +94,7 @@ const GuitarModal = () => {
                 setModalVisible(!modalVisible)}
             }
         >
-            <Text style={styles.textStyle}>Add New</Text>
+            <Text style={styles.textStyle}>Add New Guitar</Text>
         </Pressable>
         </View>
         
