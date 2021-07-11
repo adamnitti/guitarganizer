@@ -23,11 +23,16 @@ const Collection = () => {
         const id = Math.floor(Math.random() * 1000) + 1;
         const newGuitar = { id, ...guitar };
         setGtrlist([...gtrlist, newGuitar]);
+        setShowAddGuitar(!showAddGuitar);
     };
 
     const handleAddNewGuitarPress = () => {
         setShowAddGuitar(true);
     };
+
+    const onCloseModal = (state) => {
+        setShowAddGuitar(state);
+    }
 
     /* // Delete Guitar
       const deleteGuitar = (id) => {
@@ -37,10 +42,10 @@ const Collection = () => {
 
     return (
         <View
-            onAdd={() => setShowAddGuitar(!showAddGuitar)}
-            showAdd={showAddGuitar}
+            //onAdd={() => setShowAddGuitar(!showAddGuitar)}
+            //showAdd={showAddGuitar}
         >
-            {showAddGuitar && <GuitarModal onAdd={addGuitar} />}
+            {showAddGuitar && <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />}
 
             {gtrlist.length > 0 ? (
                 <FlatList
@@ -60,13 +65,13 @@ const Collection = () => {
             ) : (
                 <p>Collection empty</p>
             )}
-            <View>
+            
                 <Button
                     title="Add New Guitar"
                     style={[styles.footer, styles.button, styles.buttonOpen]}
                     onPress={handleAddNewGuitarPress}
                 />
-            </View>
+            
         </View>
     );
 };

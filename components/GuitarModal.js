@@ -8,7 +8,7 @@ import {
     Pressable,
 } from "react-native";
 
-const GuitarModal = ({ onAdd }) => {
+const GuitarModal = ({ onAdd, onCloseModal }) => {
     const [brand, setBrand] = useState("");
     const [model, setModel] = useState("");
     const [year, setYear] = useState("");
@@ -16,7 +16,10 @@ const GuitarModal = ({ onAdd }) => {
     const [description, setDescription] = useState("");
     const [history, setHistory] = useState([]);
     const [favorite, setFavorite] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false);
+
+    const handleClose = () => {
+        onCloseModal(false);
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -45,15 +48,13 @@ const GuitarModal = ({ onAdd }) => {
         setDescription("");
         setHistory([]);
         setFavorite(false);
-        setModalVisible(!modalVisible);
     };
 
     return (
         <View>
             <Modal
                 animationType="slide"
-                transparent={true}
-                visible={modalVisible}
+                transparent={true}   
             >
                 <View style={styles.modalView}>
                     <Text style={styles.modalText}>Brand</Text>
@@ -102,17 +103,14 @@ const GuitarModal = ({ onAdd }) => {
                     >
                         <Text style={styles.textStyle}>Add To Collection</Text>
                     </Pressable>
+                    <Pressable
+                        style={[styles.button, styles.buttonOpen]}
+                        onPress={handleClose}
+                    >
+                        <Text style={styles.textStyle}>Cancel</Text>
+                    </Pressable>
                 </View>
-            </Modal>
-
-            <Pressable
-                style={[styles.footer, styles.button, styles.buttonOpen]}
-                onPress={() => {
-                    setModalVisible(!modalVisible);
-                }}
-            >
-                <Text style={styles.textStyle}>Add New Guitar</Text>
-            </Pressable>
+            </Modal>  
         </View>
     );
 };
