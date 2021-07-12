@@ -2,29 +2,25 @@ import React from 'react';
 import { View, Text } from 'react-native'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import { TabRouter, useNavigation } from '@react-navigation/native';
+import styles from "./Styles";
 
-
-
-const DetailsPage = ({ route, navigation }) => {
-
-  const { item } = route.params;
+const DetailsPage = ({ guitar, hideDetails }) => {
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>{item.year} {item.brand} {item.model}</Text>
-          <Text>{item.description}</Text>
-          {item.history.map(item => 
+        <View style={styles.container}>
+          <Text>{guitar.year} {guitar.brand} {guitar.model}</Text>
+          <Text>{guitar.description}</Text>
+          {guitar.history.map(item => 
             <Text 
               key={item.id}
               item={item}
             >{item.date} {item.item} {item.cost}</Text>
           )}
           
-          <Button title="Go back" onPress={() => navigation.goBack()} />
+          <Button title="Go back" onPress={() => hideDetails()} />
+          <Button title="Delete guitar"  />
         </View>
-    );
-
-      
+    );  
 }
 
 export default DetailsPage;

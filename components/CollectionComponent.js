@@ -12,11 +12,14 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import GuitarModal from "./GuitarModal";
 //import { StyleSheet } from 'react-native';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import DetailsPage from "./DetailsPage";
 
 const Collection = () => {
     const navigation = useNavigation();
     const [showAddGuitar, setShowAddGuitar] = useState(false);
     const [gtrlist, setGtrlist] = useState(GUITARS);
+    const [showDetails, setShowDetails] = useState(false);
 
     // Add Guitar
     const addGuitar = (guitar) => {
@@ -32,40 +35,46 @@ const Collection = () => {
 
     const onCloseModal = (state) => {
         setShowAddGuitar(state);
+    };
+
+    /*// Delete Guitar
+    const deleteGuitar = (item) => {
+          setGtrlist(gtrlist.filter(guitar => guitar.id !== item.id));
+          console.log(gtrlist); 
+    };*/
+
+    // Open Details
+    const openDetails = (guitar) => {
+        console.log(guitar)
+        setShowDetails(true);
+    };
+
+    const hideDetails = () => {
+        setShowDetails(false);
     }
 
-    /* // Delete Guitar
-      const deleteGuitar = (id) => {
-          //setCollection(collection.filter(guitar => guitar.id !== id));
-          //console.log(collection); 
-      } */
-
     return (
-        <View
-            //onAdd={() => setShowAddGuitar(!showAddGuitar)}
-            //showAdd={showAddGuitar}
-        >
+        <View>
             {showAddGuitar && <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />}
 
-            {gtrlist.length > 0 ? (
+            {(gtrlist.length > 0) ? (
                 <FlatList
+                    //onDelete={deleteGuitar}
                     data={gtrlist}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
+                    renderItem={({ item }) => ( 
                         <Text
                             style={styles.item}
-                            onPress={() =>
-                                navigation.navigate("Details", { item })
-                            }
+                            onPress={() => openDetails(item)}
                         >
                             {item.year} {item.brand} {item.model}
+                            {showDetails && (<DetailsPage hideDetails={hideDetails} guitar={item}/>)}
                         </Text>
                     )}
-                />
+                />              
             ) : (
-                <p>Collection empty</p>
+                <Text>Collection empty</Text>
             )}
-            
                 <Button
                     title="Add New Guitar"
                     style={[styles.footer, styles.button, styles.buttonOpen]}
