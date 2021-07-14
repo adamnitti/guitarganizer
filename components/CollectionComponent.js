@@ -20,6 +20,7 @@ const Collection = () => {
     const [showAddGuitar, setShowAddGuitar] = useState(false);
     const [gtrlist, setGtrlist] = useState(GUITARS);
     const [showDetails, setShowDetails] = useState(false);
+    const [selectedGuitar, setSelectedGuitar] = useState({});
 
     // Add Guitar
     const addGuitar = (guitar) => {
@@ -45,19 +46,21 @@ const Collection = () => {
 
     // Open Details
     const openDetails = (guitar) => {
-        console.log(guitar)
+        //console.log(guitar);
+        setSelectedGuitar(guitar);
         setShowDetails(true);
     };
 
     const hideDetails = () => {
         setShowDetails(false);
-    }
+    };
 
     return (
         <View>
             {showAddGuitar && <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />}
 
-            {(gtrlist.length > 0) ? (
+            {(gtrlist.length <= 0) && <Text>Collection empty</Text>}
+            {(gtrlist.length > 0) && 
                 <FlatList
                     //onDelete={deleteGuitar}
                     data={gtrlist}
@@ -68,13 +71,13 @@ const Collection = () => {
                             onPress={() => openDetails(item)}
                         >
                             {item.year} {item.brand} {item.model}
-                            {showDetails && (<DetailsPage hideDetails={hideDetails} guitar={item}/>)}
+                            
                         </Text>
+                        
                     )}
-                />              
-            ) : (
-                <Text>Collection empty</Text>
-            )}
+                /> }             
+                {(showDetails) && <DetailsPage hideDetails={hideDetails} guitar={selectedGuitar}/>}
+                 
                 <Button
                     title="Add New Guitar"
                     style={[styles.footer, styles.button, styles.buttonOpen]}

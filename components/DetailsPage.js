@@ -6,6 +6,8 @@ import styles from "./Styles";
 
 const DetailsPage = ({ guitar, hideDetails }) => {
 
+    console.log(guitar);
+
     return (
         <View style={styles.container}>
           <Text>{guitar.year} {guitar.brand} {guitar.model}</Text>
