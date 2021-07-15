@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
+        //justifyContent: 'center',
+        //marginHorizontal: 16,
     },
     item: {
         backgroundColor: 'steelblue',
@@ -110,5 +112,9 @@ export default StyleSheet.create({
     },
     modalInputText: {
         fontStyle: "italic"
+    },
+    fixToText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     }
 });

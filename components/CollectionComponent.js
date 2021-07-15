@@ -6,8 +6,13 @@ import {
     FlatList,
     View,
     Text,
-    ScrollView,
     Pressable,
+    SafeAreaView,
+    LayoutAnimation,
+    StyleSheet,
+    UIManager,
+    TouchableOpacity,
+    Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import GuitarModal from "./GuitarModal";
@@ -21,6 +26,27 @@ const Collection = () => {
     const [gtrlist, setGtrlist] = useState(GUITARS);
     const [showDetails, setShowDetails] = useState(false);
     const [selectedGuitar, setSelectedGuitar] = useState({});
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    //Expandable component code
+    const ExpandableComponent = ({item}) => {
+        //Custom Component for the Expandable List
+        const [layoutHeight, setLayoutHeight] = useState(0);
+      
+        useEffect(() => {
+          if (item.isExpanded) {
+            setLayoutHeight(null);
+          } else {
+            setLayoutHeight(0);
+          }
+        }, [item.isExpanded]);
+    };
+
+    const updateLayout = (item) => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        setIsExpanded(!isExpanded);
+        ExpandableComponent(item);
+    }
 
     // Add Guitar
     const addGuitar = (guitar) => {
@@ -38,15 +64,17 @@ const Collection = () => {
         setShowAddGuitar(state);
     };
 
-    /*// Delete Guitar
+    // Delete Guitar
     const deleteGuitar = (item) => {
           setGtrlist(gtrlist.filter(guitar => guitar.id !== item.id));
-          console.log(gtrlist); 
-    };*/
+          console.log(gtrlist);
+          setShowDetails(false); 
+    };
 
     // Open Details
     const openDetails = (guitar) => {
         //console.log(guitar);
+        //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setSelectedGuitar(guitar);
         setShowDetails(true);
     };
@@ -56,35 +84,36 @@ const Collection = () => {
     };
 
     return (
-        <View>
-            {showAddGuitar && <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />}
+        <SafeAreaView style={styles.container}>
+            <View>
+                {showAddGuitar && <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />}
 
-            {(gtrlist.length <= 0) && <Text>Collection empty</Text>}
-            {(gtrlist.length > 0) && 
-                <FlatList
-                    //onDelete={deleteGuitar}
-                    data={gtrlist}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => ( 
-                        <Text
-                            style={styles.item}
-                            onPress={() => openDetails(item)}
-                        >
-                            {item.year} {item.brand} {item.model}
+                {(gtrlist.length <= 0) && <Text>Collection empty</Text>}
+                {(gtrlist.length > 0) && 
+                    <FlatList style={styles.container}
+                        data={gtrlist}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => ( 
+                            <Text
+                                style={styles.item}
+                                onPress={() => openDetails(item)}
+                            >
+                                {item.year} {item.brand} {item.model}
+                                
+                            </Text>
                             
-                        </Text>
-                        
-                    )}
-                /> }             
-                {(showDetails) && <DetailsPage hideDetails={hideDetails} guitar={selectedGuitar}/>}
-                 
-                <Button
-                    title="Add New Guitar"
-                    style={[styles.footer, styles.button, styles.buttonOpen]}
-                    onPress={handleAddNewGuitarPress}
-                />
-            
-        </View>
+                        )}
+                    /> }             
+                    {(showDetails) && <DetailsPage hideDetails={hideDetails} onDelete={deleteGuitar} guitar={selectedGuitar}/>}
+                    
+                    {(!showDetails) && <Button
+                        title="Add New Guitar"
+                        style={[styles.footer, styles.button, styles.buttonOpen]}
+                        onPress={handleAddNewGuitarPress}
+                    />}
+                
+            </View>
+        </SafeAreaView>
     );
 };
 export default Collection;
