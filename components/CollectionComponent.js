@@ -12,14 +12,14 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import GuitarModal from "./GuitarModal";
 //import { StyleSheet } from 'react-native';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import Swipeable from "react-native-gesture-handler/Swipeable";
 import DetailsPage from "./DetailsPage";
 
 const Collection = () => {
     const navigation = useNavigation();
     const [showAddGuitar, setShowAddGuitar] = useState(false);
     const [gtrlist, setGtrlist] = useState(GUITARS);
-    const [showDetails, setShowDetails] = useState(false);
+    //const [showDetails, setShowDetails] = useState(false);
     const [selectedGuitar, setSelectedGuitar] = useState({});
 
     // Add Guitar
@@ -38,52 +38,53 @@ const Collection = () => {
         setShowAddGuitar(state);
     };
 
-    /*// Delete Guitar
-    const deleteGuitar = (item) => {
-          setGtrlist(gtrlist.filter(guitar => guitar.id !== item.id));
-          console.log(gtrlist); 
-    };*/
-
-    // Open Details
-    const openDetails = (guitar) => {
-        //console.log(guitar);
-        setSelectedGuitar(guitar);
-        setShowDetails(true);
+    // Delete Guitar
+    const deleteGuitar = (id) => {
+        setGtrlist(gtrlist.filter((guitar) => guitar.id !== id));
+        console.log(gtrlist);
     };
 
-    const hideDetails = () => {
-        setShowDetails(false);
+    // Open Details Page
+    const openDetails = (guitar) => {
+        setSelectedGuitar(guitar);
+        navigation.navigate("Details", {
+            id: guitar.id,
+            year: guitar.year,
+            brand: guitar.brand,
+            model: guitar.model,
+            sn: guitar.sn,
+            description: guitar.description,
+            history: guitar.history,
+            onDelete: deleteGuitar,
+        });
     };
 
     return (
         <View>
-            {showAddGuitar && <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />}
+            {showAddGuitar && (
+                <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />
+            )}
 
-            {(gtrlist.length <= 0) && <Text>Collection empty</Text>}
-            {(gtrlist.length > 0) && 
+            {gtrlist.length == 0 && <Text>Collection empty</Text>}
+            {gtrlist.length > 0 && (
                 <FlatList
-                    //onDelete={deleteGuitar}
                     data={gtrlist}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => ( 
+                    renderItem={({ item }) => (
                         <Text
                             style={styles.item}
                             onPress={() => openDetails(item)}
                         >
                             {item.year} {item.brand} {item.model}
-                            
                         </Text>
-                        
                     )}
-                /> }             
-                {(showDetails) && <DetailsPage hideDetails={hideDetails} guitar={selectedGuitar}/>}
-                 
-                <Button
-                    title="Add New Guitar"
-                    style={[styles.footer, styles.button, styles.buttonOpen]}
-                    onPress={handleAddNewGuitarPress}
                 />
-            
+            )}
+            <Button
+                title="Add New Guitar"
+                style={[styles.footer, styles.button, styles.buttonOpen]}
+                onPress={handleAddNewGuitarPress}
+            />
         </View>
     );
 };

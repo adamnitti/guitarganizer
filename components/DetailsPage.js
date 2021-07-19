@@ -1,28 +1,37 @@
-import React from 'react';
-import { View, Text } from 'react-native'
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
-import { TabRouter, useNavigation } from '@react-navigation/native';
+import React from "react";
+import { View, Text, SafeAreaView } from "react-native";
+import { Card, ListItem, Button, Icon } from "react-native-elements";
+import { TabRouter, useNavigation } from "@react-navigation/native";
 import styles from "./Styles";
 
-const DetailsPage = ({ guitar, hideDetails }) => {
-
-    console.log(guitar);
+const DetailsPage = ({ route, navigation }) => {
+    const { id, year, brand, model, sn, description, history, onDelete } =
+        route.params;
 
     return (
-        <View style={styles.container}>
-          <Text>{guitar.year} {guitar.brand} {guitar.model}</Text>
-          <Text>{guitar.description}</Text>
-          {guitar.history.map(item => 
-            <Text 
-              key={item.id}
-              item={item}
-            >{item.date} {item.item} {item.cost}</Text>
-          )}
-          
-          <Button title="Go back" onPress={() => hideDetails()} />
-          <Button title="Delete guitar"  />
+        <View>
+            <Text>
+                {year} {brand} {model}
+            </Text>
+            <Text>S/N: {sn}</Text>
+            <Text>Description: {description}</Text>
+            {history &&
+                history.map((item) => (
+                    <Text key={item.id}>
+                        {item.date} {item.item} {item.cost}
+                    </Text>
+                ))}
+            <View>
+                <Button title="Go back" onPress={() => navigation.goBack()} />
+                <Button
+                    title="Delete guitar"
+                    onPress={() => {
+                        onDelete(id);
+                    }}
+                />
+            </View>
         </View>
-    );  
-}
+    );
+};
 
 export default DetailsPage;
