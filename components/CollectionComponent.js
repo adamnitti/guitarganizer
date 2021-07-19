@@ -19,7 +19,6 @@ const Collection = () => {
     const navigation = useNavigation();
     const [showAddGuitar, setShowAddGuitar] = useState(false);
     const [gtrlist, setGtrlist] = useState(GUITARS);
-    //const [showDetails, setShowDetails] = useState(false);
     const [selectedGuitar, setSelectedGuitar] = useState({});
 
     // Add Guitar
