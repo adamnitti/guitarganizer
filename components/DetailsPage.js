@@ -1,24 +1,23 @@
-import React from "react";
-import { View, Text, SafeAreaView } from "react-native";
-import { Card, ListItem, Button, Icon } from "react-native-elements";
-import { TabRouter, useNavigation } from "@react-navigation/native";
-import styles from "./Styles";
+import React, { useContext } from "react";
+import { View, Text } from "react-native";
+import { Button } from "react-native-elements";
+import { GuitarContext } from "./GuitarContext";
 
-const DetailsPage = ({ route, navigation }) => {
-    const { id, year, brand, model, sn, description, history, onDelete } =
-        route.params;
+const DetailsPage = ({ navigation }) => {
+    const guitar = useContext(GuitarContext);
 
     return (
         <View>
             <Text>
-                {year} {brand} {model}
+                {guitar.year} {guitar.brand} {guitar.model}
             </Text>
-            <Text>S/N: {sn}</Text>
-            <Text>Description: {description}</Text>
-            {history &&
-                history.map((item) => (
+            <Text>S/N: {guitar.sn}</Text>
+            <Text>Description: {guitar.description}</Text>
+            {guitar.history &&
+                guitar.history.map((item) => (
                     <Text key={item.id}>
-                        {item.date} {item.item} {item.cost}
+                        {item.date} {item.item}
+                        {item.cost}
                     </Text>
                 ))}
             <View>
@@ -26,7 +25,8 @@ const DetailsPage = ({ route, navigation }) => {
                 <Button
                     title="Delete guitar"
                     onPress={() => {
-                        onDelete(id);
+                        guitar.setRemove(true);
+                        navigation.navigate("Collection");
                     }}
                 />
             </View>

@@ -1,25 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { GUITARS } from "../shared/guitars";
 import styles from "./Styles";
-import {
-    Button,
-    FlatList,
-    View,
-    Text,
-    ScrollView,
-    Pressable,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Button, FlatList, View, Text } from "react-native";
 import GuitarModal from "./GuitarModal";
-//import { StyleSheet } from 'react-native';
-import Swipeable from "react-native-gesture-handler/Swipeable";
-import DetailsPage from "./DetailsPage";
+import { GuitarContext } from "./GuitarContext";
 
-const Collection = () => {
-    const navigation = useNavigation();
+const Collection = ({ navigation }) => {
     const [showAddGuitar, setShowAddGuitar] = useState(false);
     const [gtrlist, setGtrlist] = useState(GUITARS);
     const [selectedGuitar, setSelectedGuitar] = useState({});
+
+    const guitar = useContext(GuitarContext);
 
     // Add Guitar
     const addGuitar = (guitar) => {
@@ -44,18 +35,16 @@ const Collection = () => {
     };
 
     // Open Details Page
-    const openDetails = (guitar) => {
-        setSelectedGuitar(guitar);
-        navigation.navigate("Details", {
-            id: guitar.id,
-            year: guitar.year,
-            brand: guitar.brand,
-            model: guitar.model,
-            sn: guitar.sn,
-            description: guitar.description,
-            history: guitar.history,
-            onDelete: deleteGuitar,
-        });
+    const openDetails = (item) => {
+        //setSelectedGuitar(item);
+        guitar.setId(item.id);
+        guitar.setBrand(item.brand);
+        guitar.setModel(item.model);
+        guitar.setYear(item.year);
+        guitar.setSn(item.sn);
+        guitar.setDescription(item.description);
+        guitar.setHistory(item.history);
+        navigation.navigate("Details");
     };
 
     return (
@@ -65,6 +54,7 @@ const Collection = () => {
             )}
 
             {gtrlist.length == 0 && <Text>Collection empty</Text>}
+
             {gtrlist.length > 0 && (
                 <FlatList
                     data={gtrlist}
