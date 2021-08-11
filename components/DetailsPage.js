@@ -1,13 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text } from "react-native";
 import { Button } from "react-native-elements";
 import { GuitarContext } from "./GuitarContext";
+import EntryModal from "./EntryModal";
 
 const DetailsPage = ({ navigation }) => {
     const guitar = useContext(GuitarContext);
 
+    const [showAddEntry, setShowAddEntry] = useState(false);
+
+    const handleAddEntry = () => {
+        setShowAddEntry(true);
+    };
+
+    // Add Entry
+    const addEntry = (item) => {
+        const entId = Math.floor(Math.random() * 1000) + 1;
+        const newEntry = { id, ...history };
+    };
+
+    // Open Add Entry Modal
+    const closeEntryModal = () => {
+        setShowAddEntry(true);
+    };
+
+    // Close Add Entry Modal
+    const onCloseModal = (state) => {
+        setShowAddEntry(state);
+    };
+
     return (
         <View>
+            {showAddEntry && (
+                <EntryModal onAdd={addEntry} onCloseModal={closeEntryModal} />
+            )}
             <Text>
                 {guitar.year} {guitar.brand} {guitar.model}
             </Text>
@@ -20,6 +46,7 @@ const DetailsPage = ({ navigation }) => {
                         {item.cost}
                     </Text>
                 ))}
+
             <View>
                 <Button title="Go back" onPress={() => navigation.goBack()} />
                 <Button
@@ -27,6 +54,12 @@ const DetailsPage = ({ navigation }) => {
                     onPress={() => {
                         guitar.setRemove(true);
                         navigation.navigate("Collection");
+                    }}
+                />
+                <Button
+                    title="Add entry"
+                    onPress={() => {
+                        handleAddEntry();
                     }}
                 />
             </View>

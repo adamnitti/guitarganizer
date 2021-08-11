@@ -8,7 +8,7 @@ export const GUITARS = [
         favorite: false,
         description:
             "Black with rosewood fingerboard. Tortoise shell pickguard",
-        image: "./public/fenderjazz1.png",
+        image: "../public/assets/favicon.png",
         history: [
             {
                 id: 10,
@@ -38,7 +38,7 @@ export const GUITARS = [
         sn: "001",
         favorite: false,
         description: "Ash body, Red Trans, Maple board",
-        image: "../public/assets/fenderjazz2.png",
+        image: { uri: "../assets/fenderjazz1.png" },
         history: [],
     },
     {
@@ -49,7 +49,7 @@ export const GUITARS = [
         sn: "1233",
         favorite: false,
         description: "Natural",
-        image: "../public/assets/fenderjazz1.png",
+        image: { uri: "../assets/fenderjazz1.png" },
         history: [],
     },
     {
@@ -60,7 +60,7 @@ export const GUITARS = [
         sn: "S341233",
         favorite: false,
         description: "Sunburst",
-        image: "../public/assets/fenderjazz1.png",
+        image: { uri: "../assets/fenderjazz1.png" },
         history: [],
     },
     {
@@ -71,7 +71,7 @@ export const GUITARS = [
         sn: "GSF1233",
         favorite: false,
         description: "Natural",
-        image: "../public/assets/fenderjazz1.png",
+        image: { uri: "../assets/fenderjazz1.png" },
         history: [],
     },
     {
@@ -82,7 +82,7 @@ export const GUITARS = [
         sn: "A451233",
         favorite: false,
         description: "Sunburst",
-        image: "../public/assets/fenderjazz1.png",
+        image: { uri: "../assets/fenderjazz1.png" },
         history: [],
     },
     {
@@ -93,7 +93,7 @@ export const GUITARS = [
         sn: "001",
         favorite: false,
         description: "Blue Trans",
-        image: "../public/assets/fenderjazz1.png",
+        image: { uri: "../assets/fenderjazz1.png" },
         history: [],
     },
     {
@@ -104,7 +104,7 @@ export const GUITARS = [
         sn: "634562254",
         favorite: false,
         description: "Black with rosewood fingerboard",
-        image: "../public/assets/fenderjazz1.png",
+        image: { uri: "../assets/fenderjazz1.png" },
         history: [],
     },
     {
@@ -115,7 +115,7 @@ export const GUITARS = [
         sn: "567",
         favorite: false,
         description: "Black with maple fingerboard",
-        image: "../public/assets/fenderjazz1.png",
+        image: { uri: "../assets/fenderjazz1.png" },
         history: [],
     },
 ];

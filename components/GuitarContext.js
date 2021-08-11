@@ -10,8 +10,8 @@ export const GuitarProvider = ({ children }) => {
     const [description, setDescription] = useState("");
     const [year, setYear] = useState("");
     const [history, setHistory] = useState([]);
-    const [remove, setRemove] = useState(false);
-    const [onDelete, setOnDelete] = useState(() => console.log("testing"));
+    const [remove, setRemove] = useState();
+    //const [onDelete, setOnDelete] = useState("");
 
     return (
         <GuitarContext.Provider
@@ -24,7 +24,7 @@ export const GuitarProvider = ({ children }) => {
                 year,
                 history,
                 remove,
-                onDelete,
+                //onDelete,
                 setId,
                 setBrand,
                 setModel,
@@ -33,7 +33,7 @@ export const GuitarProvider = ({ children }) => {
                 setYear,
                 setHistory,
                 setRemove,
-                setOnDelete,
+                //setOnDelete,
             }}
         >
             {children}
