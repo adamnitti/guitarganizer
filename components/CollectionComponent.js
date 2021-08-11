@@ -23,7 +23,9 @@ const Collection = ({ navigation }) => {
     const addGuitar = (guitar) => {
         const id = Math.floor(Math.random() * 1000) + 1;
         const newGuitar = { id, ...guitar };
+        console.log(newGuitar);
         setGtrlist([...gtrlist, newGuitar]);
+        console.log(gtrlist);
         setShowAddGuitar(!showAddGuitar);
     };
 

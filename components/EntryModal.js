@@ -31,6 +31,7 @@ const EntryModal = ({ onAdd, onCloseModal }) => {
             date,
             item,
             cost,
+            description,
         };
 
         onAdd(entryToAdd);
@@ -48,7 +49,7 @@ const EntryModal = ({ onAdd, onCloseModal }) => {
                     <Text style={styles.modalText}>Date</Text>
                     <TextInput
                         style={styles.modalInputText}
-                        onChangeDate={setDate}
+                        onChangeText={setDate}
                         value={date}
                         placeholder="Enter Date"
                         underlineColorAndroid="transparent"

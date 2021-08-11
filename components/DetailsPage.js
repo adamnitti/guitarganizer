@@ -15,8 +15,11 @@ const DetailsPage = ({ navigation }) => {
 
     // Add Entry
     const addEntry = (item) => {
-        const entId = Math.floor(Math.random() * 1000) + 1;
-        const newEntry = { id, ...history };
+        const id = Math.floor(Math.random() * 1000) + 1;
+        item.id = id;
+        console.log(item);
+        guitar.history.push(item);
+        console.log(guitar.history);
     };
 
     // Open Add Entry Modal
