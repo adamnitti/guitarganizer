@@ -64,11 +64,36 @@ const Collection = ({ navigation }) => {
         return (
             <View>
                 <ListItem
+                    //hideChevron={false}
                     onPress={() => openDetails(item)}
                     title={item.brand}
                     subtitle={item.model}
                 ></ListItem>
             </View>
+        );
+    };
+
+    const FlatListItemSeparator = () => {
+        return (
+            <View
+                elevation={1}
+                style={{
+                    height: 1,
+                    width: "97%",
+                    margin: 2,
+                    backgroundColor: "black",
+                    border: 2,
+                    borderColor: "black",
+                    alignSelf: "center",
+                    shadowColor: "gray",
+                    shadowOffset: {
+                        width: 0,
+                        height: 10,
+                    },
+                    shadowOpacity: 1,
+                    shadowRadius: 7.49,
+                }}
+            ></View>
         );
     };
 
@@ -83,6 +108,7 @@ const Collection = ({ navigation }) => {
                 <FlatList
                     data={gtrlist}
                     keyExtractor={(item) => item.id.toString()}
+                    ItemSeparatorComponent={FlatListItemSeparator}
                     renderItem={renderGuitarItem}
                 />
             )}

@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 import { View, Text } from "react-native";
-import { Button } from "react-native-elements";
+import { Button, FlatList, Divider, ListItem } from "react-native-elements";
 import { GuitarContext } from "./GuitarContext";
 import EntryModal from "./EntryModal";
+import Styles from "./Styles";
+import { SafeAreaView } from "react-native";
 
 const DetailsPage = ({ navigation }) => {
     const guitar = useContext(GuitarContext);
@@ -20,11 +22,12 @@ const DetailsPage = ({ navigation }) => {
         console.log(item);
         guitar.history.push(item);
         console.log(guitar.history);
+        setShowAddEntry(false);
     };
 
     // Open Add Entry Modal
     const closeEntryModal = () => {
-        setShowAddEntry(true);
+        setShowAddEntry(false);
     };
 
     // Close Add Entry Modal
@@ -32,27 +35,36 @@ const DetailsPage = ({ navigation }) => {
         setShowAddEntry(state);
     };
 
+    const renderItem = (item) => {
+        <Text>{item.date}</Text>;
+    };
+
     return (
-        <View>
+        <SafeAreaView style={{ flex: 1 }}>
             {showAddEntry && (
                 <EntryModal onAdd={addEntry} onCloseModal={closeEntryModal} />
             )}
-            <Text>
+            <Text style={Styles.detailsHeadingText}>
                 {guitar.year} {guitar.brand} {guitar.model}
             </Text>
-            <Text>S/N: {guitar.sn}</Text>
-            <Text>Description: {guitar.description}</Text>
+            <Text style={Styles.detailsItemText}>S/N: {guitar.sn}</Text>
+            <Text style={Styles.detailsItemText}>{guitar.description}</Text>
+            <Divider />
             {guitar.history &&
                 guitar.history.map((item) => (
-                    <Text key={item.id}>
-                        {item.date} {item.item}
-                        {item.cost}
+                    <Text style={Styles.detailsItemText} key={item.id}>
+                        {item.date} {item.item} {item.cost} {item.description}
                     </Text>
                 ))}
 
             <View>
-                <Button title="Go back" onPress={() => navigation.goBack()} />
                 <Button
+                    style={(Styles.modalFooter, Styles.modalButton)}
+                    title="Go back"
+                    onPress={() => navigation.goBack()}
+                />
+                <Button
+                    style={(Styles.modalFooter, Styles.modalButton)}
                     title="Delete guitar"
                     onPress={() => {
                         guitar.setRemove(true);
@@ -60,13 +72,14 @@ const DetailsPage = ({ navigation }) => {
                     }}
                 />
                 <Button
+                    style={(Styles.modalFooter, Styles.modalButton)}
                     title="Add entry"
                     onPress={() => {
                         handleAddEntry();
                     }}
                 />
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
