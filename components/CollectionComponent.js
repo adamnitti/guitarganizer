@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { GUITARS } from "../shared/guitars";
 import styles from "./Styles";
 import {
@@ -15,7 +15,17 @@ import { GuitarContext } from "./GuitarContext";
 
 const Collection = ({ navigation }) => {
     const [showAddGuitar, setShowAddGuitar] = useState(false);
-    const [gtrlist, setGtrlist] = useState(GUITARS);
+    const [gtrlist, setGtrlist] = useState([GUITARS]);
+
+    //const [gtrlist, setGtrlist] = useState([]);
+    //const [isLoading, setLoading] = useState(true);
+
+    /* const getGuitars = async () => {
+        console.log("test");
+        fetch("https://10.0.2.2/guitars/");
+        console.log(guitars)
+
+    getGuitars(); */
 
     const guitar = useContext(GuitarContext);
 

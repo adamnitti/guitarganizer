@@ -76,18 +76,18 @@ export default StyleSheet.create({
         marginTop: 22,
     },
     modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        shadowColor: "#000",
-        shadowOffset: {
+        //margin: 20,
+        //backgroundColor: "white",
+        //borderRadius: 20,
+        //padding: 35,
+        //shadowColor: "#000",
+        /*shadowOffset: {
             width: 0,
             height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
+        },*/
+        //shadowOpacity: 0.25,
+        //shadowRadius: 4,
+        //elevation: 5,
     },
     modalButton: {
         borderRadius: 10,

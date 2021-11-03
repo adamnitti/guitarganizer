@@ -19,7 +19,7 @@ const GuitarModal = ({ onAdd, onCloseModal }) => {
 
     const handleClose = () => {
         onCloseModal(false);
-    }
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -52,10 +52,7 @@ const GuitarModal = ({ onAdd, onCloseModal }) => {
 
     return (
         <View>
-            <Modal
-                animationType="slide"
-                transparent={true}   
-            >
+            <Modal animationType="slide" transparent={true}>
                 <View style={styles.modalView}>
                     <Text style={styles.modalText}>Brand</Text>
                     <TextInput
@@ -110,7 +107,7 @@ const GuitarModal = ({ onAdd, onCloseModal }) => {
                         <Text style={styles.textStyle}>Cancel</Text>
                     </Pressable>
                 </View>
-            </Modal>  
+            </Modal>
         </View>
     );
 };
