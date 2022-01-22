@@ -15,7 +15,7 @@ import { GuitarContext } from "./GuitarContext";
 
 const Collection = ({ navigation }) => {
     const [showAddGuitar, setShowAddGuitar] = useState(false);
-    const [gtrlist, setGtrlist] = useState([GUITARS]);
+    const [gtrlist, setGtrlist] = useState(GUITARS);
 
     //const [gtrlist, setGtrlist] = useState([]);
     //const [isLoading, setLoading] = useState(true);
@@ -71,15 +71,14 @@ const Collection = ({ navigation }) => {
     };
 
     const renderGuitarItem = ({ item }) => {
+        console.log(item);
         return (
-            <View>
-                <ListItem
-                    //hideChevron={false}
-                    onPress={() => openDetails(item)}
-                    title={item.brand}
-                    subtitle={item.model}
-                ></ListItem>
-            </View>
+            <ListItem
+                //hideChevron={false}
+                onPress={() => openDetails(item)}
+                title={item.brand}
+                subtitle={item.model}
+            ></ListItem>
         );
     };
 
@@ -117,9 +116,9 @@ const Collection = ({ navigation }) => {
             {gtrlist.length > 0 && (
                 <FlatList
                     data={gtrlist}
+                    renderItem={renderGuitarItem}
                     keyExtractor={(item) => item.id.toString()}
                     ItemSeparatorComponent={FlatListItemSeparator}
-                    renderItem={renderGuitarItem}
                 />
             )}
 
