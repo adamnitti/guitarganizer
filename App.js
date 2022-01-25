@@ -17,6 +17,7 @@ export default function App() {
                     <Stack.Screen
                         name="Main"
                         component={Main}
+                        // TODO: Uncomment after some condition is met or whatever
                         //options={{title: 'Welcome to Guitarganizer!'}}
                     />
                     <Stack.Screen name="Collection" component={Collection} />
