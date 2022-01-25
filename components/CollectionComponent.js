@@ -78,7 +78,7 @@ const Collection = ({ navigation }) => {
                 onPress={() => openDetails(item)}
                 title={item.brand}
                 subtitle={item.model}
-            ></ListItem>
+            />
         );
     };
 
