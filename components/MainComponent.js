@@ -12,7 +12,6 @@ const Main = ({ navigation }) => {
                     justifyContent: "center",
                 }}
             >
-                <Text>Main Screen</Text>
                 <Button
                     title={"Collection"}
                     onPress={() => navigation.navigate("Collection")}
