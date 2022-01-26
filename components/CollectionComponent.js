@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useState, useContext } from "react";
 import { guitarsFixture } from "../fixtures/guitars";
@@ -65,7 +66,6 @@ const Collection = ({ navigation }) => {
         console.log(item);
         return (
             <ListItem
-                //hideChevron={false}
                 onPress={() => openDetails(item)}
                 title={item.brand}
                 subtitle={item.model}

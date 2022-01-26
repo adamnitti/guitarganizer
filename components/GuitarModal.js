@@ -41,13 +41,13 @@ const GuitarModal = ({ onAdd, onCloseModal }) => {
 
         onAdd(theGuitarToAdd);
 
-        setBrand("");
+        /* setBrand("");
         setModel("");
         setYear("");
         setSn("");
         setDescription("");
         setHistory([]);
-        setFavorite(false);
+        setFavorite(false); */
     };
 
     return (
