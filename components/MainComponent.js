@@ -1,26 +1,24 @@
-import React, { useState } from 'react';
-import { View, SafeAreaView } from 'react-native';
-import styles from './Styles';
-import Collection from './CollectionComponent';
-//import { GUITARS } from '../shared/guitars';
-import GuitarModal from './GuitarModal';
+import React, { useState } from "react";
+import { View, Button, SafeAreaView, Text } from "react-native";
+import styles from "./Styles";
 
-const Main = () => {
-    
-    //const [guitars, setGuitars] = useState({ GUITARS })
-
-
-    
+const Main = ({ navigation }) => {
     return (
-        
         <View style={styles.container}>
-            <View style={styles.scrollContainer}>
-                <Collection /> 
+            <View
+                style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+            >
+                <Button
+                    title={"Collection"}
+                    onPress={() => navigation.navigate("Collection")}
+                ></Button>
             </View>
-            
         </View>
     );
-    
 };
 
 export default Main;

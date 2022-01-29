@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { GUITARS } from "../shared/guitars";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
+import React, { useEffect, useState, useContext } from "react";
+import { guitarsFixture } from "../fixtures/guitars";
 import styles from "./Styles";
 import {
     Button,
     FlatList,
-    View,
+    SafeAreaView,
     Text,
+<<<<<<< HEAD
     Pressable,
     SafeAreaView,
     LayoutAnimation,
@@ -13,16 +16,18 @@ import {
     UIManager,
     TouchableOpacity,
     Platform,
+=======
+    Image,
+    View,
+>>>>>>> 009a0bd9cd5b748d82762f072a39f06c805787fb
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { ListItem, Avatar } from "react-native-elements";
 import GuitarModal from "./GuitarModal";
-//import { StyleSheet } from 'react-native';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import DetailsPage from "./DetailsPage";
+import { GuitarContext } from "./GuitarContext";
 
-const Collection = () => {
-    const navigation = useNavigation();
+const Collection = ({ navigation }) => {
     const [showAddGuitar, setShowAddGuitar] = useState(false);
+<<<<<<< HEAD
     const [gtrlist, setGtrlist] = useState(GUITARS);
     const [showDetails, setShowDetails] = useState(false);
     const [selectedGuitar, setSelectedGuitar] = useState({});
@@ -47,23 +52,41 @@ const Collection = () => {
         setIsExpanded(!isExpanded);
         ExpandableComponent(item);
     }
+=======
+    const [gtrlist, setGtrlist] = useState(guitarsFixture);
+
+    const guitar = useContext(GuitarContext);
+>>>>>>> 009a0bd9cd5b748d82762f072a39f06c805787fb
 
     // Add Guitar
-    const addGuitar = (guitar) => {
-        const id = Math.floor(Math.random() * 1000) + 1;
-        const newGuitar = { id, ...guitar };
+    const addGuitar = (guitarToAdd) => {
+        const id = uuidv4();
+        const newGuitar = { id, ...guitarToAdd };
+        console.log(newGuitar);
         setGtrlist([...gtrlist, newGuitar]);
-        setShowAddGuitar(!showAddGuitar);
+        console.log(gtrlist);
+        setShowAddGuitar(false);
     };
 
+    // Remove Guitar
+    const removeGuitar = (item) => {
+        guitar.remove = false;
+        const filtCol = gtrlist.filter((guitar) => guitar.id !== item.id);
+        console.log(filtCol);
+        setGtrlist(filtCol);
+    };
+
+    // Open Add Guitar Modal
     const handleAddNewGuitarPress = () => {
         setShowAddGuitar(true);
     };
 
-    const onCloseModal = (state) => {
-        setShowAddGuitar(state);
+    // Close Add Guitar Modal
+    const toggleModal = (isOpen) => {
+        setShowAddGuitar(isOpen);
     };
 
+<<<<<<< HEAD
     // Delete Guitar
     const deleteGuitar = (item) => {
           setGtrlist(gtrlist.filter(guitar => guitar.id !== item.id));
@@ -77,13 +100,58 @@ const Collection = () => {
         //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setSelectedGuitar(guitar);
         setShowDetails(true);
+=======
+    // Open Details Page
+    const openDetails = (item) => {
+        guitar.setId(item.id);
+        guitar.setBrand(item.brand);
+        guitar.setModel(item.model);
+        guitar.setYear(item.year);
+        guitar.setSn(item.sn);
+        guitar.setDescription(item.description);
+        guitar.setHistory(item.history);
+        guitar.setRemove(false);
+        navigation.navigate("Details");
     };
 
-    const hideDetails = () => {
-        setShowDetails(false);
+    const renderGuitarItem = ({ item }) => {
+        console.log(item);
+        return (
+            <ListItem
+                onPress={() => openDetails(item)}
+                title={item.brand}
+                subtitle={item.model}
+            />
+        );
+>>>>>>> 009a0bd9cd5b748d82762f072a39f06c805787fb
+    };
+
+    const FlatListItemSeparator = () => {
+        return (
+            <View
+                elevation={1}
+                style={{
+                    height: 1,
+                    width: "97%",
+                    margin: 2,
+                    backgroundColor: "black",
+                    border: 2,
+                    borderColor: "black",
+                    alignSelf: "center",
+                    shadowColor: "gray",
+                    shadowOffset: {
+                        width: 0,
+                        height: 10,
+                    },
+                    shadowOpacity: 1,
+                    shadowRadius: 7.49,
+                }}
+            ></View>
+        );
     };
 
     return (
+<<<<<<< HEAD
         <SafeAreaView style={styles.container}>
             <View>
                 {showAddGuitar && <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />}
@@ -113,6 +181,28 @@ const Collection = () => {
                     />}
                 
             </View>
+=======
+        <SafeAreaView style={{ flex: 1 }}>
+            {guitar.remove === true && removeGuitar(guitar)}
+            {showAddGuitar && (
+                <GuitarModal onAdd={addGuitar} toggleModal={toggleModal} />
+            )}
+            {gtrlist.length === 0 && <Text>Collection empty</Text>}
+            {gtrlist.length > 0 && (
+                <FlatList
+                    data={gtrlist}
+                    renderItem={renderGuitarItem}
+                    keyExtractor={(item) => item.id.toString()}
+                    ItemSeparatorComponent={FlatListItemSeparator}
+                />
+            )}
+
+            <Button
+                title="Add New Guitar"
+                style={[styles.footer, styles.button, styles.buttonOpen]}
+                onPress={handleAddNewGuitarPress}
+            />
+>>>>>>> 009a0bd9cd5b748d82762f072a39f06c805787fb
         </SafeAreaView>
     );
 };

@@ -8,14 +8,11 @@ import {
     Pressable,
 } from "react-native";
 
-const GuitarModal = ({ onAdd, onCloseModal }) => {
-    const [brand, setBrand] = useState("");
-    const [model, setModel] = useState("");
-    const [year, setYear] = useState("");
-    const [sn, setSn] = useState("");
+const EntryModal = ({ onAdd, onCloseModal }) => {
+    const [date, setDate] = useState("");
+    const [item, setItem] = useState("");
+    const [cost, setCost] = useState("");
     const [description, setDescription] = useState("");
-    const [history, setHistory] = useState([]);
-    const [favorite, setFavorite] = useState(false);
 
     const handleClose = () => {
         onCloseModal(false);
@@ -24,66 +21,52 @@ const GuitarModal = ({ onAdd, onCloseModal }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if (!brand || !model) {
-            alert("Please add a guitar and model");
+        if (!item) {
+            alert("Please add an entry");
             return;
         }
 
-        const theGuitarToAdd = {
-            brand,
-            model,
-            year,
-            sn,
+        const entryToAdd = {
+            date,
+            item,
+            cost,
             description,
-            history,
-            favorite,
         };
 
-        onAdd(theGuitarToAdd);
+        onAdd(entryToAdd);
 
-        /* setBrand("");
-        setModel("");
-        setYear("");
-        setSn("");
-        setDescription("");
-        setHistory([]);
-        setFavorite(false); */
+        /* setDate("");
+        setItem("");
+        setCost("");
+        setDescription(""); */
     };
 
     return (
         <View>
             <Modal animationType="slide" transparent={true}>
                 <View style={styles.modalView}>
-                    <Text style={styles.modalText}>Brand</Text>
+                    <Text style={styles.modalText}>Date</Text>
                     <TextInput
                         style={styles.modalInputText}
-                        onChangeText={setBrand}
-                        value={brand}
-                        placeholder="Enter Brand"
+                        onChangeText={setDate}
+                        value={date}
+                        placeholder="Enter Date"
                         underlineColorAndroid="transparent"
                     />
-                    <Text style={styles.modalText}>Model</Text>
+                    <Text style={styles.modalText}>Item</Text>
                     <TextInput
                         style={styles.modalInputText}
-                        onChangeText={setModel}
-                        value={model}
-                        placeholder="Enter Model"
+                        onChangeText={setItem}
+                        value={item}
+                        placeholder="Enter Item"
                         underlineColorAndroid="transparent"
                     />
-                    <Text style={styles.modalText}>Year Mfg</Text>
+                    <Text style={styles.modalText}>Cost</Text>
                     <TextInput
                         style={styles.modalInputText}
-                        onChangeText={setYear}
-                        value={year}
-                        placeholder="Enter Year Manufactured"
-                        underlineColorAndroid="transparent"
-                    />
-                    <Text style={styles.modalText}>Serial Number</Text>
-                    <TextInput
-                        style={styles.modalInputText}
-                        onChangeText={setSn}
-                        value={sn}
-                        placeholder="Enter Serial #"
+                        onChangeText={setCost}
+                        value={cost}
+                        placeholder="Enter Cost"
                         underlineColorAndroid="transparent"
                     />
                     <Text style={styles.modalText}>Description</Text>
@@ -94,11 +77,12 @@ const GuitarModal = ({ onAdd, onCloseModal }) => {
                         placeholder="Enter Description"
                         underlineColorAndroid="transparent"
                     />
+
                     <Pressable
                         style={[styles.button, styles.buttonOpen]}
                         onPress={onSubmit}
                     >
-                        <Text style={styles.textStyle}>Add To Collection</Text>
+                        <Text style={styles.textStyle}>Add Entry</Text>
                     </Pressable>
                     <Pressable
                         style={[styles.button, styles.buttonOpen]}
@@ -166,4 +150,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default GuitarModal;
+export default EntryModal;

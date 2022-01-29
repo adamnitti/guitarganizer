@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     container: {
@@ -7,91 +7,94 @@ export default StyleSheet.create({
         //marginHorizontal: 16,
     },
     item: {
-        backgroundColor: 'steelblue',
+        backgroundColor: "steelblue",
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
     },
     header: {
-        backgroundColor: '#e91e63',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: "#e91e63",
+        alignItems: "center",
+        justifyContent: "center",
         borderBottomWidth: 5,
-        borderBottomColor: '#ddd',
-        height: 50
+        borderBottomColor: "#ddd",
+        height: 50,
     },
     headerText: {
-        color: 'white',
+        color: "white",
         fontSize: 18,
-        padding: 26
+        padding: 26,
     },
     scrollContainer: {
         flex: 1,
-        marginBottom: 50
+        marginBottom: 50,
     },
     footer: {
-        position: 'absolute',
-        alignItems: 'center',
+        position: "relative",
+        alignItems: "center",
         bottom: 0,
         left: 0,
         right: 0,
         zIndex: 10,
     },
     textInput: {
-        alignSelf: 'stretch',
-        color: '#fff',
+        alignSelf: "stretch",
+        color: "#fff",
         padding: 20,
-        backgroundColor: '#252525',
+        backgroundColor: "#252525",
         borderTopWidth: 2,
-        borderTopColor: '#ededed'
+        borderTopColor: "#ededed",
     },
     addButton: {
-        position: 'absolute',
+        position: "absolute",
         zIndex: 11,
         right: 20,
         bottom: 5,
-        backgroundColor: '#e91e63',
+        backgroundColor: "#e91e63",
         width: 60,
         height: 60,
         borderRadius: 50,
-        alignItems: 'center' ,
-        justifyContent: 'center',
-        elevation: 8
+        alignItems: "center",
+        justifyContent: "center",
+        elevation: 8,
     },
     addButtonText: {
-        color: '#fff',
-        fontSize: 32
+        color: "#fff",
+        fontSize: 32,
     },
     modalFooter: {
+        margin: 15,
+        top: 5,
         bottom: 5,
-        left: 0,
-        right: 0,
-        zIndex: 10,
+        alignItems: "center",
+        //left: 15,
+        right: 15,
+        zIndex: 0,
     },
     modalCenteredView: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22
+        marginTop: 22,
     },
     modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        shadowColor: "#000",
-        shadowOffset: {
-        width: 0,
-        height: 2,
-    },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
+        //margin: 20,
+        //backgroundColor: "white",
+        //borderRadius: 20,
+        //padding: 35,
+        //shadowColor: "#000",
+        /*shadowOffset: {
+            width: 0,
+            height: 2,
+        },*/
+        //shadowOpacity: 0.25,
+        //shadowRadius: 4,
+        //elevation: 5,
     },
     modalButton: {
         borderRadius: 10,
         padding: 10,
-        elevation: 2
+        elevation: 2,
     },
     modalButtonOpen: {
         backgroundColor: "#e91e63",
@@ -102,15 +105,16 @@ export default StyleSheet.create({
     modalTextStyle: {
         color: "white",
         fontWeight: "bold",
-        textAlign: "center"
+        textAlign: "center",
     },
     modalText: {
         fontWeight: "bold",
         marginBottom: 15,
         textAlign: "left",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     modalInputText: {
+<<<<<<< HEAD
         fontStyle: "italic"
     },
     fixToText: {
@@ -118,3 +122,23 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
     }
 });
+=======
+        fontStyle: "italic",
+    },
+    detailsHeadingText: {
+        fontWeight: "bold",
+        fontSize: 18,
+        margin: 15,
+        textAlign: "left",
+        justifyContent: "center",
+    },
+    detailsItemText: {
+        fontWeight: "bold",
+        fontSize: 16,
+        marginLeft: 15,
+        marginRight: 15,
+        marginBottom: 10,
+        justifyContent: "center",
+    },
+});
+>>>>>>> 009a0bd9cd5b748d82762f072a39f06c805787fb
