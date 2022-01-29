@@ -45,8 +45,8 @@ const Collection = ({ navigation }) => {
     };
 
     // Close Add Guitar Modal
-    const toggleModal = (state) => {
-        setShowAddGuitar(state);
+    const toggleModal = (isOpen) => {
+        setShowAddGuitar(isOpen);
     };
 
     // Open Details Page
