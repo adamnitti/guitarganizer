@@ -9,7 +9,6 @@ import {
 } from "react-native";
 
 const EntryModal = ({ onAdd, onCloseModal }) => {
-    //const [id, setId] = useState("");
     const [date, setDate] = useState("");
     const [item, setItem] = useState("");
     const [cost, setCost] = useState("");
@@ -36,10 +35,10 @@ const EntryModal = ({ onAdd, onCloseModal }) => {
 
         onAdd(entryToAdd);
 
-        setDate("");
+        /* setDate("");
         setItem("");
         setCost("");
-        setDescription("");
+        setDescription(""); */
     };
 
     return (

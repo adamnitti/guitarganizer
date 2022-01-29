@@ -1,5 +1,7 @@
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useState, useContext } from "react";
-import { GUITARS } from "../shared/guitars";
+import { guitarsFixture } from "../fixtures/guitars";
 import styles from "./Styles";
 import {
     Button,
@@ -15,28 +17,18 @@ import { GuitarContext } from "./GuitarContext";
 
 const Collection = ({ navigation }) => {
     const [showAddGuitar, setShowAddGuitar] = useState(false);
-    const [gtrlist, setGtrlist] = useState(GUITARS);
-
-    //const [gtrlist, setGtrlist] = useState([]);
-    //const [isLoading, setLoading] = useState(true);
-
-    /* const getGuitars = async () => {
-        console.log("test");
-        fetch("https://10.0.2.2/guitars/");
-        console.log(guitars)
-
-    getGuitars(); */
+    const [gtrlist, setGtrlist] = useState(guitarsFixture);
 
     const guitar = useContext(GuitarContext);
 
     // Add Guitar
-    const addGuitar = (guitar) => {
-        const id = Math.floor(Math.random() * 1000) + 1;
-        const newGuitar = { id, ...guitar };
+    const addGuitar = (guitarToAdd) => {
+        const id = uuidv4();
+        const newGuitar = { id, ...guitarToAdd };
         console.log(newGuitar);
         setGtrlist([...gtrlist, newGuitar]);
         console.log(gtrlist);
-        setShowAddGuitar(!showAddGuitar);
+        setShowAddGuitar(false);
     };
 
     // Remove Guitar
@@ -53,8 +45,8 @@ const Collection = ({ navigation }) => {
     };
 
     // Close Add Guitar Modal
-    const onCloseModal = (state) => {
-        setShowAddGuitar(state);
+    const toggleModal = (isOpen) => {
+        setShowAddGuitar(isOpen);
     };
 
     // Open Details Page
@@ -74,11 +66,10 @@ const Collection = ({ navigation }) => {
         console.log(item);
         return (
             <ListItem
-                //hideChevron={false}
                 onPress={() => openDetails(item)}
                 title={item.brand}
                 subtitle={item.model}
-            ></ListItem>
+            />
         );
     };
 
@@ -110,9 +101,9 @@ const Collection = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1 }}>
             {guitar.remove === true && removeGuitar(guitar)}
             {showAddGuitar && (
-                <GuitarModal onAdd={addGuitar} onCloseModal={onCloseModal} />
+                <GuitarModal onAdd={addGuitar} toggleModal={toggleModal} />
             )}
-            {gtrlist.length == 0 && <Text>Collection empty</Text>}
+            {gtrlist.length === 0 && <Text>Collection empty</Text>}
             {gtrlist.length > 0 && (
                 <FlatList
                     data={gtrlist}

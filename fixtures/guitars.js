@@ -1,4 +1,4 @@
-export const GUITARS = [
+export const guitarsFixture = [
     {
         id: 0,
         brand: "Fender",
